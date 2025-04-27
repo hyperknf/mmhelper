@@ -5,12 +5,13 @@
   "name": "MMHelper",
   "description": "Helper mod for Murder Mystery on Hypixel",
   "authors": [
-    "HyperKNF"
+    "HyperKNF",
+    "thatDudo"
   ],
   "contact": {
-    "email": "contact@hyperknf.com"
+    "homepage": "www.hyperknf.com"
   },
-  "license": "All-Rights-Reserved",
+  "license": "CC0-1.0",
   "icon": "assets/mmhelper/icon.png",
   "environment": "*",
   "entrypoints": {
