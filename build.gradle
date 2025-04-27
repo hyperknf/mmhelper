@@ -7,7 +7,7 @@ version = project.mod_version
 group = project.maven_group
 
 base {
-    archivesName = "${archives_base_name}-${mod_version}-${minecraft_version}.jar"
+    archivesName = "${archives_base_name}"
 }
 
 loom {
@@ -87,7 +87,6 @@ jar {
     from("LICENSE") {
         rename { "${it}_${project.archivesBaseName}" }
     }
-    archiveFileName = "${archives_base_name}-${mod_version}-${minecraft_version}.jar"
 }
 
 // configure the maven publication
