@@ -2,10 +2,14 @@
   "schemaVersion": 1,
   "id": "mmhelper",
   "version": "${version}",
-  "name": "mmhelper",
-  "description": "Helper mod for murder mystery on Hypixel",
-  "authors": [],
-  "contact": {},
+  "name": "MMHelper",
+  "description": "Helper mod for Murder Mystery on Hypixel",
+  "authors": [
+    "HyperKNF"
+  ],
+  "contact": {
+    "email": "contact@hyperknf.com"
+  },
   "license": "All-Rights-Reserved",
   "icon": "assets/mmhelper/icon.png",
   "environment": "*",
