@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "mmhelper",
+  "version": "${version}",
+  "name": "mmhelper",
+  "description": "Helper mod for murder mystery on Hypixel",
+  "authors": [],
+  "contact": {},
+  "license": "All-Rights-Reserved",
+  "icon": "assets/mmhelper/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.hyperknf.mmhelper.MMHelper"
+    ],
+    "modmenu": [
+      "com.hyperknf.mmhelper.plugin.ModMenuIntegration"
+    ]
+  },
+  "mixins": [
+    "mmhelper.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}

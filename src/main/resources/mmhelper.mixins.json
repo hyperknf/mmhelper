@@ -1,0 +1,21 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.hyperknf.mmhelper.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [],
+  "client": [
+    "MinecraftClientMixin",
+    "EntityMixin",
+    "PlayerEntityMixin",
+    "PlayerInventoryMixin",
+    "ScoreboardMixin",
+    "LivingEntityRendererMixin",
+    "InGameHudMixin",
+    "ArmorStandEntityMixin",
+    "ClientPlayNetworkHandlerMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
