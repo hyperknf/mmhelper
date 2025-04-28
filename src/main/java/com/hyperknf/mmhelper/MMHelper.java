@@ -94,7 +94,7 @@ public class MMHelper implements ModInitializer {
     }
 
     public void showMarkedPlayers(MinecraftClient client) {
-        if (!isEnabled()) return;
+        if (!isActive()) return;
 
         String murderersList = "";
         String detectivesList = "";
