@@ -11,7 +11,7 @@
   "contact": {
     "homepage": "www.hyperknf.com"
   },
-  "license": "CC0-1.0",
+  "license": "MIT",
   "icon": "assets/mmhelper/icon.png",
   "environment": "*",
   "entrypoints": {

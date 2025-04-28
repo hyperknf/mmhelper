@@ -82,8 +82,7 @@ public abstract class PlayerEntityMixin implements PlayerEntityMixinAccess {
                 if (!hasBow() && (heldItem == Items.BOW || heldItem == Items.ARROW)) {
                     _hasBow = true;
                     MMHelper.markedDetectives.add(((PlayerEntity)(Object)this).getGameProfile().getId());
-                }
-                else if (ConfigManager.getConfig().mm.isMurderItem(heldItem)) {
+                } else if (ConfigManager.getConfig().mm.isMurderItem(heldItem)) {
                     if (!MMHelper.clientIsMurder) {
                         MinecraftUtils.sendChatMessage("[MMHelper] " + Text.translatable("message.mm.murder_marked", Formatting.RED+((PlayerEntity)(Object)this).getGameProfile().getName()).getString());
                     }

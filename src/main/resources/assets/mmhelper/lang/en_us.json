@@ -4,10 +4,13 @@
 
   "message.enabled": "%s enabled",
   "message.disabled": "%s disabled",
-  "message.mm.murder_marked": "Found Murder: %s",
+  "message.mm.murder_marked": "Found murderer: %s",
   "message.mm.starting_murder_mode": "Murder Help Activated",
   "message.mm.client_is_murder": "You are murderer",
   "message.mm.is_mm_lobby":  "Murder Mystery lobby detected",
+
+  "message.show_murderers":  "Marked murderers: ",
+  "message.show_detectives": "Marked players with bows: ",
 
   "notification.update.title": "Murder Mystery Helper",
   "notification.update.description": "A new version is available: %s",
@@ -15,6 +18,7 @@
   "key.category.mmhelper": "Murder Mystery Helper",
   "key.mmhelper.enable": "Toggle Enabled",
   "key.mmhelper.settings": "Open Settings",
+  "key.mmhelper.show_marked_players": "Show murderers in chat",
 
   "config.generic.title": "Generic",
   "config.generic.enabled.title": "Enabled",

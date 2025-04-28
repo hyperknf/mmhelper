@@ -2,7 +2,7 @@ package com.hyperknf.mmhelper;
 
 import com.hyperknf.mmhelper.config.Config;
 import com.hyperknf.mmhelper.config.ConfigManager;
-import com.hyperknf.mmhelper.utils.GithubFetcher;
+import com.hyperknf.mmhelper.utils.MinecraftUtils;
 import com.hyperknf.mmhelper.utils.ModProperties;
 import com.hyperknf.mmhelper.gui.ScreenBuilder;
 
@@ -12,6 +12,9 @@ import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.util.InputUtil;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import org.lwjgl.glfw.GLFW;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +22,7 @@ import org.slf4j.LoggerFactory;
 import net.minecraft.client.option.KeyBinding;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.UUID;
 
 public class MMHelper implements ModInitializer {
@@ -26,6 +30,7 @@ public class MMHelper implements ModInitializer {
 
     private static KeyBinding keyBindingOpenSettings;
     private static KeyBinding keyToggleEnabled;
+    private static KeyBinding keyShowMarkedPlayers;
 
     public static boolean onHypixel = false;
     public enum HypixelLobbies {
@@ -46,8 +51,8 @@ public class MMHelper implements ModInitializer {
 
     public static boolean clientIsMurder = false;
     public static boolean clientIsDead = false;
-    public static ArrayList<UUID> markedMurders = new ArrayList<>();
-    public static ArrayList<UUID> markedDetectives = new ArrayList<>();
+    public static HashSet<UUID> markedMurders = new HashSet<>();
+    public static HashSet<UUID> markedDetectives = new HashSet<>();
 
     @Override
     public void onInitialize() {
@@ -70,6 +75,12 @@ public class MMHelper implements ModInitializer {
                 GLFW.GLFW_KEY_UNKNOWN,
                 "key.category." + ModProperties.MOD_ID
         ));
+        keyShowMarkedPlayers = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+                "key." + ModProperties.MOD_ID + ".show_marked_players",
+                InputUtil.Type.KEYSYM,
+                GLFW.GLFW_KEY_UNKNOWN,
+                "key.category." + ModProperties.MOD_ID
+        ));
         ClientTickEvents.END_CLIENT_TICK.register(this::tick);
 
         logger.info("MMHelper successfully initialized");
@@ -78,6 +89,31 @@ public class MMHelper implements ModInitializer {
     public void tick(MinecraftClient client) {
         if (keyBindingOpenSettings.wasPressed())
             ScreenBuilder.openConfigScreen(client);
+        if (keyShowMarkedPlayers.wasPressed())
+            showMarkedPlayers(client);
+    }
+
+    public void showMarkedPlayers(MinecraftClient client) {
+        if (!isEnabled()) return;
+
+        String murderersList = "";
+        String detectivesList = "";
+        if (client.world != null)
+            for (PlayerEntity player : client.world.getPlayers()) {
+                UUID uuid = player.getGameProfile().getId();
+                if (markedMurders.contains(uuid))
+                    murderersList += player.getGameProfile().getName() + " ";
+                if (markedDetectives.contains(uuid))
+                    detectivesList += player.getGameProfile().getName() + " ";
+            }
+        if (murderersList.isEmpty()) murderersList = "None";
+        if (detectivesList.isEmpty()) detectivesList = "None";
+
+        MinecraftUtils.sendChatMessage("");
+        MinecraftUtils.sendChatMessage("[MMHelper]");
+        MinecraftUtils.sendChatMessage(Text.translatable("message.show_murderers").getString() + Formatting.RED + murderersList);
+        MinecraftUtils.sendChatMessage(Text.translatable("message.show_detectives").getString() + Formatting.AQUA + detectivesList);
+        MinecraftUtils.sendChatMessage("");
     }
 
     public static void setModEnabled(boolean state) {
