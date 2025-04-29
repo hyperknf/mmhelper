@@ -89,6 +89,8 @@ public class MMHelper implements ModInitializer {
     public void tick(MinecraftClient client) {
         if (keyBindingOpenSettings.wasPressed())
             ScreenBuilder.openConfigScreen(client);
+        if (keyToggleEnabled.wasPressed())
+            ConfigManager.getConfig().enabled = !ConfigManager.getConfig().enabled;
         if (keyShowMarkedPlayers.wasPressed())
             showMarkedPlayers(client);
     }
