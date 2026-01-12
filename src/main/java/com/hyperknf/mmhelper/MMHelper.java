@@ -57,6 +57,7 @@ public class MMHelper implements ModInitializer {
     public void onInitialize() {
         ConfigManager.init();
 
+        // no default keybinds
         keyBindingOpenSettings = KeyBindingHelper.registerKeyBinding(new KeyBinding(
                 "key." + ModProperties.MOD_ID + ".settings",
                 InputUtil.Type.KEYSYM,
