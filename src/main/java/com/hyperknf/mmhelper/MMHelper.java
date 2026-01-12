@@ -125,7 +125,6 @@ public class MMHelper implements ModInitializer {
         Config config = ConfigManager.getConfig();
         if (config.mm.highlightMurders != state) {
             config.mm.highlightMurders = state;
-            // remove marked murderers
             if (!state)
                 markedMurders.clear();
         }
