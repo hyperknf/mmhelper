@@ -4,6 +4,7 @@ import com.hyperknf.mmhelper.access.ArmorStandEntityMixinAccess;
 import net.minecraft.entity.decoration.ArmorStandEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.EulerAngle;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -24,15 +25,14 @@ public class ArmorStandEntityMixin implements ArmorStandEntityMixinAccess {
     @Inject(at = @At("HEAD"), method = "setRightArmRotation")
     private void onSetRightArmRotation(EulerAngle angle, CallbackInfo info) {
         if (lastRightArmYaw == Float.NEGATIVE_INFINITY)
-            lastRightArmYaw = angle.getYaw();
+            lastRightArmYaw = angle.yaw();
 
-        if (!_isHoldingDetectiveBow && Math.abs(lastRightArmYaw - angle.getYaw()) >= 0.1) {
-            for (ItemStack held : ((ArmorStandEntity)(Object)this).getHandItems())
-                if (held.getItem() == Items.BOW) {
-                    _isHoldingDetectiveBow = true;
-                    break;
-                }
-            lastRightArmYaw = angle.getYaw();
+        if (!_isHoldingDetectiveBow && Math.abs(lastRightArmYaw - angle.yaw()) >= 0.1) {
+            ArmorStandEntity self = (ArmorStandEntity)(Object)this;
+            if (self.getOffHandStack().getItem() == Items.BOW || self.getMainHandStack().getItem() == Items.BOW) {
+                _isHoldingDetectiveBow = true;
+            }
+            lastRightArmYaw = angle.yaw();
         }
     }
 }

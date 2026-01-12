@@ -8,6 +8,7 @@ import com.hyperknf.mmhelper.config.Config;
 import com.hyperknf.mmhelper.config.ConfigManager;
 import com.hyperknf.mmhelper.utils.MinecraftUtils;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.screen.DownloadingTerrainScreen;
 import net.minecraft.client.network.ServerInfo;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
@@ -26,7 +27,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(MinecraftClient.class)
 public class MinecraftClientMixin {
     @Inject(at = @At("HEAD"), method = "joinWorld")
-    private void onJoinWorld(ClientWorld world, CallbackInfo info) {
+    private void onJoinWorld(ClientWorld world, DownloadingTerrainScreen.WorldEntryReason worldEntryReason, CallbackInfo ci) {
         if (!MMHelper.onHypixel) {
             ServerInfo entry = ((MinecraftClient)(Object)this).getCurrentServerEntry();
             if (entry != null) {

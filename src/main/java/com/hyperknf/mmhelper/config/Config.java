@@ -7,9 +7,7 @@ import net.minecraft.text.MutableText;
 import net.minecraft.item.Item;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Arrays;
-import java.util.UUID;
 import java.util.HashSet;
 
 public class Config {
@@ -90,7 +88,7 @@ public class Config {
         }
 
         public boolean isMurderItem(Item item) {
-            return item instanceof SwordItem || item instanceof MusicDiscItem || murderItems.contains(Item.getRawId(item)) ||
+            return murderItems.contains(Item.getRawId(item)) ||
                     (item instanceof ShovelItem && item != Items.WOODEN_SHOVEL);
         }
 

@@ -2,11 +2,9 @@ package com.hyperknf.mmhelper.mixin;
 
 import com.hyperknf.mmhelper.MMHelper;
 import com.hyperknf.mmhelper.access.PlayerEntityMixinAccess;
-import com.hyperknf.mmhelper.config.Config;
 import com.hyperknf.mmhelper.config.ConfigManager;
 import com.hyperknf.mmhelper.utils.MinecraftUtils;
 import com.mojang.authlib.GameProfile;
-import net.minecraft.client.RunArgs;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
@@ -74,11 +72,11 @@ public abstract class PlayerEntityMixin implements PlayerEntityMixinAccess {
         }
     }
 
-    @Inject(at = @At("RETURN"), method = "getEquippedStack")
-    private void onEquip(EquipmentSlot slot, CallbackInfoReturnable<ItemStack> info) {
+    @Inject(at = @At("HEAD"), method = "tick")
+    private void onEquip(CallbackInfo ci) {
         if (MMHelper.isActive() && !MMHelper.roundEnded) {
             if (!isMurder() && isRealPlayer()) {
-                Item heldItem = info.getReturnValue().getItem();
+                Item heldItem = ((PlayerEntity)(Object)this).getMainHandStack().getItem();
                 if (!hasBow() && (heldItem == Items.BOW || heldItem == Items.ARROW)) {
                     _hasBow = true;
                     MMHelper.markedDetectives.add(((PlayerEntity)(Object)this).getGameProfile().getId());
