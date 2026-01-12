@@ -93,18 +93,18 @@ public class MMHelper implements ModInitializer {
     public void showMarkedPlayers(MinecraftClient client) {
         if (!isActive()) return;
 
-        String murderersList = "";
-        String detectivesList = "";
+        StringBuilder murderersList = new StringBuilder();
+        StringBuilder detectivesList = new StringBuilder();
         if (client.world != null)
             for (PlayerEntity player : client.world.getPlayers()) {
                 UUID uuid = player.getGameProfile().getId();
                 if (markedMurders.contains(uuid))
-                    murderersList += player.getGameProfile().getName() + " ";
+                    murderersList.append(player.getGameProfile().getName()).append(" ");
                 if (markedDetectives.contains(uuid))
-                    detectivesList += player.getGameProfile().getName() + " ";
+                    detectivesList.append(player.getGameProfile().getName()).append(" ");
             }
-        if (murderersList.isEmpty()) murderersList = "None";
-        if (detectivesList.isEmpty()) detectivesList = "None";
+        if (murderersList.isEmpty()) murderersList = new StringBuilder("None");
+        if (detectivesList.isEmpty()) detectivesList = new StringBuilder("None");
 
         MinecraftUtils.sendChatMessage("");
         MinecraftUtils.sendChatMessage("[MMHelper]");
