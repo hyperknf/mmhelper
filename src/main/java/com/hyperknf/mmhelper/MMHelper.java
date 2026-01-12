@@ -57,11 +57,6 @@ public class MMHelper implements ModInitializer {
     @Override
     public void onInitialize() {
         ConfigManager.init();
-        /* outdated list
-        GithubFetcher.getMurderItems(items -> {
-            ConfigManager.getConfig().mm.murderItems = items;
-            ConfigManager.writeConfig(true);
-        });*/
 
         keyBindingOpenSettings = KeyBindingHelper.registerKeyBinding(new KeyBinding(
                 "key." + ModProperties.MOD_ID + ".settings",
