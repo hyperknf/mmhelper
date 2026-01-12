@@ -117,6 +117,8 @@ public class MMHelper implements ModInitializer {
         Config config = ConfigManager.getConfig();
         if (state != config.enabled)
             config.enabled = state;
+        else
+            logger.warn("MMHelper is already enabled");
     }
 
     public static void setHighlightMurders(boolean state) {
